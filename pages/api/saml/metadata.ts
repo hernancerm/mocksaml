@@ -27,7 +27,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse<
       entityId: getEntityId(config.entityId, req.query.namespace as any),
       ssoUrl: getSSOUrl(config.appUrl, req.query.namespace as any),
       x509cert: saml.stripCertHeaderAndFooter(config.publicKey),
-      wantAuthnRequestsSigned: true,
+      wantAuthnRequestsSigned: false,
     });
 
     res.setHeader('Content-type', 'text/xml');

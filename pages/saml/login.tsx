@@ -3,7 +3,13 @@ import { useRouter } from 'next/router';
 import type { FormEvent } from 'react';
 import { useEffect, useRef, useState } from 'react';
 
-export default function Login() {
+import config from 'lib/env';
+
+export async function getServerSideProps() {
+  return { props: { idpTitle: config.idpTitle } };
+}
+
+export default function Login({ idpTitle }: { idpTitle: string }) {
   const router = useRouter();
   const { id, audience, acsUrl, providerName, relayState, namespace } = router.query;
 
@@ -71,7 +77,7 @@ export default function Login() {
           {/* Card */}
           <div className='rounded-lg border border-gray-200 bg-white p-4 shadow-sm'>
             <h2 className='mb-6 text-center text-2xl font-semibold text-gray-900'>
-              {!acsUrl ? 'SAML IdP Login' : 'SAML SSO Login'}
+              {!acsUrl ? `${idpTitle} SAML IdP Login` : `${idpTitle} SAML SSO Login`}
             </h2>
 
             <form onSubmit={handleSubmit}>

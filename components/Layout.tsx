@@ -4,10 +4,11 @@ import Header from './Header';
 
 type LayoutProps = {
   children: ReactNode;
+  idpTitle: string;
 };
 
-export default function Layout({ children }: LayoutProps) {
-  const title = 'Mock SAML - A free SAML 2.0 Identity Provider for testing SAML SSO integrations.';
+export default function Layout({ children, idpTitle }: LayoutProps) {
+  const title = `${idpTitle} - A free SAML 2.0 Identity Provider for testing SAML SSO integrations.`;
   const description = 'A free SAML 2.0 Identity Provider for testing SAML SSO integrations.';
   const website = 'https://mocksaml.com';
   const ogImage = `${website}/mock-saml-preview-image.png`;
@@ -34,7 +35,7 @@ export default function Layout({ children }: LayoutProps) {
         <meta name='twitter:description' content={description} />
         <meta name='twitter:image' content={ogImage} />
       </Head>
-      <Header />
+      <Header idpTitle={idpTitle} />
       <main className='h-[calc(100%-80px)] overflow-auto py-5'>{children}</main>
     </>
   );
